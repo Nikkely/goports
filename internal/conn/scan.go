@@ -7,12 +7,9 @@ import (
 )
 
 // IsTCPOpend check tcp connection with host, port
-func IsTCPOpened(host, port string, timeoutDur time.Duration) (ok bool) {
+func IsTCPOpened(host, port string, timeoutDur time.Duration) string {
 	_, err := net.DialTimeout("tcp", makeAddr(host, port), timeoutDur)
-	if err == nil {
-		ok = true
-	}
-	return
+	return err.Error()
 }
 
 func makeAddr(host, port string) string {
