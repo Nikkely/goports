@@ -49,7 +49,7 @@ func main() {
 func naiveScan(addr string, ports []string, timeout time.Duration) []string {
 	resultList := make([]string, len(ports))
 	for i, port := range ports {
-		resultList[i] = conn.IsTCPOpened(addr, port, timeout)
+		resultList[i] = conn.CheckTCPOpened(addr, port, timeout)
 	}
 	return resultList
 }
@@ -61,7 +61,7 @@ func paraScan(addr string, ports []string, timeout time.Duration) []string {
 		wg.Add(1)
 		go func(x int) {
 			defer wg.Done()
-			resultList[x] = conn.IsTCPOpened(addr, ports[x], timeout)
+			resultList[x] = conn.CheckTCPOpened(addr, ports[x], timeout)
 		}(i)
 	}
 	wg.Wait()

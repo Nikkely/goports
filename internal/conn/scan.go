@@ -6,8 +6,8 @@ import (
 	"time"
 )
 
-// IsTCPOpend check tcp connection with host, port
-func IsTCPOpened(host, port string, timeoutDur time.Duration) string {
+// CheckTCPOpend check tcp connection and return error message.
+func CheckTCPOpened(host, port string, timeoutDur time.Duration) string {
 	_, err := net.DialTimeout("tcp", makeAddr(host, port), timeoutDur)
 	return err.Error()
 }
