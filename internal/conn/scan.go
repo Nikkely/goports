@@ -7,9 +7,12 @@ import (
 )
 
 // CheckTCPOpend check tcp connection and return error message.
-func CheckTCPOpened(host, port string, timeoutDur time.Duration) string {
+func CheckTCPOpened(host, port string, timeoutDur time.Duration) (msg string) {
 	_, err := net.DialTimeout("tcp", makeAddr(host, port), timeoutDur)
-	return err.Error()
+	if err != nil {
+		msg = err.Error()
+	}
+	return
 }
 
 func makeAddr(host, port string) string {
